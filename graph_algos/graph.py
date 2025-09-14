@@ -1,6 +1,6 @@
 from typing import Union
-from node import Node
-from edge import Edge
+from .node import Node
+from .edge import Edge
 
 class Graph:
     def __init__(self, num_nodes: int, undirected: bool=False): 

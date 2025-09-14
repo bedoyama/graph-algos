@@ -1,5 +1,5 @@
 from typing import Union
-from edge import Edge
+from .edge import Edge
 
 class Node:
     def __init__(self, index: int, label=None):
