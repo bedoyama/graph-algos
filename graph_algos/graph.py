@@ -58,3 +58,11 @@ class Graph:
             for edge in node.edges.values():
                 g2.insert_edge(edge.from_node, edge.to_node, edge.weight)
         return g2
+
+    def __str__(self):
+        lines = [f"Graph with {self.num_nodes} nodes, undirected={self.undirected}"]
+        for node in self.nodes:
+            edge_list = node.get_edge_list()
+            edges_str = ', '.join([f"({edge.source}->{edge.destination}, w={edge.weight})" for edge in edge_list])
+            lines.append(f"Node {node.index} [{node.label}]: {edges_str}")
+        return '\n'.join(lines)
