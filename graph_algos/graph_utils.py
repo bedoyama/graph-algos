@@ -35,3 +35,39 @@ class GraphUtils:
         if g.num_nodes == 0:
             return 0.0
         return total / g.num_nodes
+    
+    @staticmethod
+    def check_node_path_valid(g: Graph, path: list) -> bool: 
+        num_nodes_on_path: int = len(path)
+        if num_nodes_on_path == 0:
+            return True
+        prev_node: int = path[0]
+        if prev_node < 0 or prev_node >= g.num_nodes:
+            return False
+
+        for step in range(1, num_nodes_on_path):
+            next_node: int = path[step]
+            if not g.is_edge(prev_node, next_node):
+                return False
+            prev_node = next_node
+        return True
+
+    @staticmethod
+    def check_edge_path_valid(g: Graph, path: list) -> bool: 
+        if len(path) == 0:
+            return True
+
+        prev_node: int = path[0].from_node
+        if prev_node < 0 or prev_node >= g.num_nodes:
+            return False
+
+        for edge in path:
+            if edge.from_node != prev_node:
+                return False
+
+            next_node: int = edge.to_node
+            if not g.is_edge(prev_node, next_node):
+                return False
+
+            prev_node = next_node
+        return True
