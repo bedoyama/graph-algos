@@ -59,6 +59,13 @@ class Graph:
                 g2.insert_edge(edge.from_node, edge.to_node, edge.weight)
         return g2
 
+    def get_in_neighbors(self, target: int) -> set:  
+        neighbors: set = set()
+        for node in self.nodes:
+            if target in node.edges:
+                neighbors.add(node.index)
+        return neighbors
+    
     def __str__(self):
         lines = [f"Graph with {self.num_nodes} nodes, undirected={self.undirected}"]
         for node in self.nodes:
