@@ -66,6 +66,29 @@ class Graph:
                 neighbors.add(node.index)
         return neighbors
     
+    def make_undirected_neighborhood_subgraph(self, ind: int, closed: bool):  
+        if not self.undirected:
+            raise ValueError
+
+        nodes_to_use: set = self.nodes[ind].get_neighbors()
+        if closed:
+            nodes_to_use.add(ind)
+
+        index_map = {}
+        for new_index, old_index in enumerate(nodes_to_use):
+            index_map[old_index] = new_index
+
+        g_new: Graph = Graph(len(nodes_to_use), undirected=True)
+        
+        for n in nodes_to_use:
+            for edge in self.nodes[n].get_edge_list():
+                if edge.to_node in nodes_to_use and edge.to_node > n:
+                    ind1_new = index_map[n]
+                    ind2_new = index_map[edge.to_node]
+                    g_new.insert_edge(ind1_new, ind2_new, edge.weight)
+
+        return g_new
+
     def __str__(self):
         lines = [f"Graph with {self.num_nodes} nodes, undirected={self.undirected}"]
         for node in self.nodes:
