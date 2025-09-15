@@ -1,3 +1,4 @@
+import math
 from graph_algos.graph import Graph
 
 
@@ -71,3 +72,43 @@ class GraphUtils:
 
             prev_node = next_node
         return True
+    
+    # translating a previous node list into a list of nodes
+    @staticmethod
+    def make_node_path_from_last(last: list, dest: int) -> list: 
+        reverse_path: list = []
+        current: int = dest
+
+        while current != -1:
+            reverse_path.append(current)
+            current = last[current]
+
+        path: list = list(reversed(reverse_path))
+        return path
+
+    # checking the validity of a previous node list
+    @staticmethod
+    def check_last_path_valid(g: Graph, last: list) -> bool: 
+        if len(last) != g.num_nodes:
+            return False
+
+        for to_node, from_node in enumerate(last):
+            if from_node != -1 and not g.is_edge(from_node, to_node):
+                return False
+        return True
+    
+    @staticmethod
+    def compute_path_cost_from_edges(path: list) -> float: 
+        if len(path) == 0:
+            return 0.0
+
+        cost: float = 0.0
+        prev_node: int = path[0].from_node
+        for edge in path:
+            if edge.from_node != prev_node:
+                cost = math.inf
+            else:
+                cost = cost + edge.weight
+            prev_node = edge.to_node
+
+        return cost
