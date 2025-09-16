@@ -1,4 +1,4 @@
-from graph_algos.graph import Graph
+from graph_algos.entities.graph import Graph
 
 
 g: Graph = Graph(5, undirected=False)

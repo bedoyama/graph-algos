@@ -79,7 +79,7 @@ class Graph:
             index_map[old_index] = new_index
 
         g_new: Graph = Graph(len(nodes_to_use), undirected=True)
-        
+
         for n in nodes_to_use:
             for edge in self.nodes[n].get_edge_list():
                 if edge.to_node in nodes_to_use and edge.to_node > n:

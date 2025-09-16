@@ -1,5 +1,5 @@
 import math
-from graph_algos.graph import Graph
+from graph_algos.entities.graph import Graph
 
 
 class GraphUtils:
