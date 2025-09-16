@@ -1,7 +1,7 @@
 from graph_algos.entities.graph import Graph
 from graph_algos.entities.node import Node
 
-class GraphSearchUtils:
+class GraphDFSUtils:
 
     @staticmethod
     def dfs_recursive_basic(g:Graph, ind:int, seen:list):
@@ -10,19 +10,19 @@ class GraphSearchUtils:
 
         for edge in current.get_edge_list():
             if not seen[edge.to_node]:
-                GraphSearchUtils.dfs_recursive_basic(g, edge.to_node, seen)
+                GraphDFSUtils.dfs_recursive_basic(g, edge.to_node, seen)
 
     @staticmethod
     def depth_first_search(g:Graph, start:int):
         seen: list = [False]*g.num_nodes
-        GraphSearchUtils.dfs_recursive_basic(g, start, seen)
+        GraphDFSUtils.dfs_recursive_basic(g, start, seen)
 
     @staticmethod
     def depth_first_search_basic_all(g: Graph): 
         seen: list = [False] * g.num_nodes
         for ind in range(g.num_nodes):
             if not seen[ind]:
-                GraphSearchUtils.dfs_recursive_basic(g, ind, seen)
+                GraphDFSUtils.dfs_recursive_basic(g, ind, seen)
 
     @staticmethod
     def dfs_recursive_path(g: Graph, ind: int, seen: list, last: list): 
@@ -33,7 +33,7 @@ class GraphSearchUtils:
             neighbor: int = edge.to_node
             if not seen[neighbor]:
                 last[neighbor] = ind
-                GraphSearchUtils.dfs_recursive_path(g, neighbor, seen, last)
+                GraphDFSUtils.dfs_recursive_path(g, neighbor, seen, last)
 
     @staticmethod
     def depth_first_search_path(g: Graph) -> list: 
@@ -42,7 +42,7 @@ class GraphSearchUtils:
 
         for ind in range(g.num_nodes):
             if not seen[ind]:
-                GraphSearchUtils.dfs_recursive_path(g, ind, seen, last)
+                GraphDFSUtils.dfs_recursive_path(g, ind, seen, last)
         return last
 
     @staticmethod
@@ -75,7 +75,7 @@ class GraphSearchUtils:
         for edge in current.get_edge_list():
             neighbor: int = edge.to_node
             if component[neighbor] == -1:
-                GraphSearchUtils.dfs_recursive_cc(g, neighbor, component, curr_comp)
+                GraphDFSUtils.dfs_recursive_cc(g, neighbor, component, curr_comp)
 
     @staticmethod
     def dfs_connected_components(g: Graph) -> list:
@@ -84,7 +84,7 @@ class GraphSearchUtils:
 
         for ind in range(g.num_nodes):
             if component[ind] == -1:
-                GraphSearchUtils.dfs_recursive_cc(g, ind, component, curr_comp)
+                GraphDFSUtils.dfs_recursive_cc(g, ind, component, curr_comp)
                 curr_comp += 1
 
         return component
