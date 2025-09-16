@@ -1,6 +1,7 @@
 import queue
 
 from graph_algos.entities.graph import Graph
+from graph_algos.entities.node import Node
 
 
 class GraphBFSUtils:
