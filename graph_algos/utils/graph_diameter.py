@@ -8,8 +8,7 @@ from graph_algos.entities.graph.graph import Graph
 class GraphDiameter:
     @staticmethod
     def compute(g: Graph) -> float: 
-        fwComputer = FloydWarshall()
-        last: list = fwComputer.compute(g)
+        last: list = FloydWarshall.compute(g)
         max_cost: float = -math.inf
 
         for i in range(g.num_nodes):

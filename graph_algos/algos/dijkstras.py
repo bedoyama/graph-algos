@@ -7,7 +7,7 @@ from graph_algos.entities.pq.priority_queue import PriorityQueue
 
 
 class Dijkstras:
-
+    @staticmethod
     def compute(g: Graph, start_index: int) -> list: 
         cost: list = [math.inf] * g.num_nodes
         last: list = [-1] * g.num_nodes

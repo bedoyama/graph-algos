@@ -4,20 +4,21 @@ from graph_algos.entities.graph.graph import Graph
 
 
 class AllPairsCost:
+    @staticmethod
     def computeUsingBellmanFord(g: Graph) -> list:
         last: list = []
-        bfComputer = BellmanFord()
         for n in range(g.num_nodes):
-            last.append(bfComputer.compute(g, n))
+            last.append(BellmanFord.compute(g, n))
         return last
     
+    @staticmethod
     def computeUsingDijkstras(g: Graph) -> list:
         last: list = []
-        dComputer = Dijkstras()
         for n in range(g.num_nodes):
-            last.append(dComputer.compute(g, n))
+            last.append(Dijkstras.compute(g, n))
         return last
 
+    @staticmethod
     def compute(g: Graph, use_dijkstras: bool = True) -> list:
         if use_dijkstras:
             return AllPairsCost.computeUsingDijkstras(g)

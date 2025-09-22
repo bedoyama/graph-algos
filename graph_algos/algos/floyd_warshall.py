@@ -5,7 +5,7 @@ from graph_algos.entities.graph.graph import Graph
 
 
 class FloydWarshall:
-
+    @staticmethod
     def compute(g: Graph) -> list: 
         N: int = g.num_nodes
         cost: list = [[math.inf] * N for _ in range(N)]

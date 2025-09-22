@@ -4,7 +4,7 @@ from graph_algos.entities.graph.graph import Graph
 
 
 class BellmanFord:
-
+    @staticmethod
     def compute(g: Graph, start_index: int) -> Union[list, None]: 
         cost: list = [math.inf] * g.num_nodes
         last: list = [-1] * g.num_nodes
