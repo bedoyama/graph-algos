@@ -1,8 +1,10 @@
+import math
 import queue
 from typing import Union
 
+from graph_algos.algos.heuristic_search import HeuristicSearch
 from graph_algos.entities.graph import Graph
-from graph_algos.entities.node import Node
+from graph_algos.entities.graph import Node
 from graph_algos.utils.graph_bfs_utils import GraphBFSUtils
 
 
@@ -114,3 +116,20 @@ def solve_pg_bfs():
 
     for i, n in enumerate(reversed(path_reversed)):
         print(f"Step {i}: {g.nodes[n].label}")
+
+def pg_generate_heuristic(g: Graph) -> list: 
+    heuristic = [0.0] * g.num_nodes
+    for node in g.nodes:
+        state: PGState = node.label
+        num_left: int = state.guards_left + state.prisoners_left
+        min_trips_l_to_r: int = math.ceil(num_left / 2.0)
+        min_trips_r_to_l: int = max(0, min_trips_l_to_r - 1)
+        if not state.boat_side == "L" and min_trips_l_to_r > 0:
+            min_trips_r_to_l += 1
+        heuristic[node.index] = min_trips_l_to_r + min_trips_r_to_l
+
+    return heuristic
+
+g: Graph = create_prisoners_and_guards()
+h: list = pg_generate_heuristic(g)
+last: list = HeuristicSearch.a_star_search(g, h, 0, 14)
